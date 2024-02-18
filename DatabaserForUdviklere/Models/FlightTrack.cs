@@ -19,5 +19,7 @@ public partial class FlightTrack
 
     public double? Radiation { get; set; }
 
+    public int Region { get; set; }
+
     public virtual Flight? Flight { get; set; }
 }

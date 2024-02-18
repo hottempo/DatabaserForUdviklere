@@ -18,4 +18,6 @@ public partial class Country
     public string? Province { get; set; }
 
     public string? Iso2Code { get; set; }
+
+    public int Status { get; set; }
 }
