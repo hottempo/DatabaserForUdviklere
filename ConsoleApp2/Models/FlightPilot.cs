@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Models
 {
-    internal class Pilot
+    internal class FlightPilot
     {
+        public int FlightId { get; set; }
+        public Flight Flight { get; set; }
+
         public int PilotId { get; set; }
-        public string Name { get; set; }
-        public ICollection<FlightPilot> FlightPilots { get; set; }
+        public Pilot Pilot { get; set; }
+
     }
 }

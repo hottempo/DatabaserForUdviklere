@@ -16,6 +16,6 @@ namespace ConsoleApp2.Models
         public DateTime Landing { get; set; }
 
         public Aircraft Aircraft { get; set; }
-        public ICollection<Pilot> Pilots { get; set; }
+        public ICollection<FlightPilot> FlightPilots { get; set; }
     }
 }
