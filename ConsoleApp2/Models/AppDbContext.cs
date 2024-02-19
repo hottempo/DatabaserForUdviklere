@@ -42,16 +42,25 @@ namespace ConsoleApp2.Models
 
         private void SeedData(ModelBuilder modelBuilder)
         {
-            var aircrafts = JsonSerializer.Deserialize<List<Aircraft>>(File.ReadAllText("aircrafts.json"));
-            var pilots = JsonSerializer.Deserialize<List<Pilot>>(File.ReadAllText("unique_pilots.json"));
-            var flights = JsonSerializer.Deserialize<List<Flight>>(File.ReadAllText("flights.json"));
-            var flightPilots = JsonSerializer.Deserialize<List<FlightPilot>>(File.ReadAllText("flightPilot.json"));
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
 
+            var aircraftsFilePath = Path.Combine(basePath, "aircrafts.json");
+            var aircrafts = JsonSerializer.Deserialize<List<Aircraft>>(File.ReadAllText(aircraftsFilePath));
             modelBuilder.Entity<Aircraft>().HasData(aircrafts);
+
+            var pilotsFilePath = Path.Combine(basePath, "unique_pilots.json");
+            var pilots = JsonSerializer.Deserialize<List<Pilot>>(File.ReadAllText(pilotsFilePath));
             modelBuilder.Entity<Pilot>().HasData(pilots);
+
+            var flightsFilePath = Path.Combine(basePath, "flights.json");
+            var flights = JsonSerializer.Deserialize<List<Flight>>(File.ReadAllText(flightsFilePath));
             modelBuilder.Entity<Flight>().HasData(flights);
+
+            var flightPilotsFilePath = Path.Combine(basePath, "flightPilot.json");
+            var flightPilots = JsonSerializer.Deserialize<List<FlightPilot>>(File.ReadAllText(flightPilotsFilePath));
             modelBuilder.Entity<FlightPilot>().HasData(flightPilots);
         }
+
 
         // public AppDbContext(DbContextOptions<AppDbContext> options) : base (options) { }
 
