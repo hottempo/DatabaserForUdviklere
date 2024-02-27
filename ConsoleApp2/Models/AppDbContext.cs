@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace ConsoleApp2.Models
+namespace LittleAirline.Models
 {
     internal class AppDbContext : DbContext
     {
@@ -17,7 +12,9 @@ namespace ConsoleApp2.Models
         public DbSet<FlightPilot> FlightPilots { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=airline.db");
+            => options.UseSqlite("Data Source=airline.db")
+            .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, Microsoft.Extensions.Logging.LogLevel.Information)
+            .EnableSensitiveDataLogging();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,10 +57,5 @@ namespace ConsoleApp2.Models
             var flightPilots = JsonSerializer.Deserialize<List<FlightPilot>>(File.ReadAllText(flightPilotsFilePath));
             modelBuilder.Entity<FlightPilot>().HasData(flightPilots);
         }
-
-
-        // public AppDbContext(DbContextOptions<AppDbContext> options) : base (options) { }
-
-
     }
 }
